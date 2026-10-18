@@ -525,3 +525,39 @@ fun BiodataForm(modifier: Modifier = Modifier) {
         }
     }
 }
+
+@Composable
+fun BiodataScreen(modifier: Modifier = Modifier) {
+    val cardShape = RoundedCornerShape(
+        topStart = dimensionResource(id = R.dimen.card_corner_radius),
+        topEnd = dimensionResource(id = R.dimen.card_corner_radius)
+    )
+
+    Scaffold(
+        modifier = modifier.fillMaxSize(),
+        containerColor = colorResource(id = R.color.screen_background)
+    ) { innerPadding ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+        ) {
+            HeaderImage(modifier = Modifier.align(Alignment.TopCenter))
+            Box(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .fillMaxWidth()
+                    .fillMaxHeight()
+                    .padding(top = dimensionResource(id = R.dimen.card_top_margin))
+                    .shadow(
+                        elevation = dimensionResource(id = R.dimen.card_elevation),
+                        shape = cardShape
+                    )
+                    .clip(cardShape)
+                    .background(colorResource(id = R.color.card_background))
+            ) {
+                BiodataForm()
+            }
+        }
+    }
+}
