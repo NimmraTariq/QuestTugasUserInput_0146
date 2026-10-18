@@ -55,3 +55,44 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
+
+@Composable
+fun PagerDots(modifier: Modifier = Modifier) {
+    val dotColors = listOf(
+        colorResource(id = R.color.dot_active),
+        colorResource(id = R.color.dot_inactive),
+        colorResource(id = R.color.dot_inactive),
+        colorResource(id = R.color.dot_inactive)
+    )
+
+    Row(
+        modifier = modifier.padding(dimensionResource(id = R.dimen.dots_padding)),
+        horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.dot_spacing))
+    ) {
+        dotColors.forEach { dotColor ->
+            Box(
+                modifier = Modifier
+                    .size(dimensionResource(id = R.dimen.dot_size))
+                    .clip(CircleShape)
+                    .background(dotColor)
+            )
+        }
+    }
+}
+
+@Composable
+fun HeaderImage(modifier: Modifier = Modifier) {
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(dimensionResource(id = R.dimen.header_height))
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.header_image),
+            contentDescription = stringResource(id = R.string.cd_header_image),
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
+        )
+        PagerDots(modifier = Modifier.align(Alignment.TopStart))
+    }
+}
