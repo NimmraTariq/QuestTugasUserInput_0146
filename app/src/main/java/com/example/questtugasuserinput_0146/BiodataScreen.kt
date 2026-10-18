@@ -438,3 +438,90 @@ fun ResultBox(
         )
     }
 }
+
+@Composable
+fun BiodataForm(modifier: Modifier = Modifier) {
+    var firstName by remember { mutableStateOf("") }
+    var lastName by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var birthDate by remember { mutableStateOf("") }
+    var experience by remember { mutableStateOf("") }
+    var androidChecked by remember { mutableStateOf(false) }
+    var uiuxChecked by remember { mutableStateOf(false) }
+    var webChecked by remember { mutableStateOf(false) }
+    var submitted by remember { mutableStateOf(false) }
+
+    val skillAndroid = stringResource(id = R.string.skill_android)
+    val skillUiux = stringResource(id = R.string.skill_uiux)
+    val skillWeb = stringResource(id = R.string.skill_web)
+    val separator = stringResource(id = R.string.skills_separator)
+
+    val selectedSkills = listOfNotNull(
+        skillAndroid.takeIf { androidChecked },
+        skillUiux.takeIf { uiuxChecked },
+        skillWeb.takeIf { webChecked }
+    )
+    val allFilled = firstName.isNotBlank() &&
+            lastName.isNotBlank() &&
+            email.isNotBlank() &&
+            birthDate.isNotBlank() &&
+            experience.isNotBlank() &&
+            selectedSkills.isNotEmpty()
+
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .verticalScroll(rememberScrollState())
+            .padding(dimensionResource(id = R.dimen.card_padding)),
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.section_spacing))
+    ) {
+        FormTitle()
+        NameFields(
+            firstName = firstName,
+            onFirstNameChange = { firstName = it },
+            lastName = lastName,
+            onLastNameChange = { lastName = it }
+        )
+        EmailField(
+            email = email,
+            onEmailChange = { email = it }
+        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.field_spacing))
+        ) {
+            BirthDateField(
+                birthDate = birthDate,
+                onBirthDateChange = { birthDate = it },
+                modifier = Modifier.weight(1f)
+            )
+            ExperienceDropdown(
+                selected = experience,
+                onSelected = { experience = it },
+                modifier = Modifier.weight(1f)
+            )
+        }
+        SkillsSection(
+            androidChecked = androidChecked,
+            onAndroidChange = { androidChecked = it },
+            uiuxChecked = uiuxChecked,
+            onUiuxChange = { uiuxChecked = it },
+            webChecked = webChecked,
+            onWebChange = { webChecked = it }
+        )
+        ProceedButton(
+            enabled = allFilled,
+            onClick = { submitted = true }
+        )
+        if (submitted && allFilled) {
+            ResultBox(
+                firstName = firstName,
+                lastName = lastName,
+                email = email,
+                birthDate = birthDate,
+                experience = experience,
+                skills = selectedSkills.joinToString(separator)
+            )
+        }
+    }
+}
