@@ -185,3 +185,64 @@ fun EmailField(
         modifier = modifier.fillMaxWidth()
     )
 }
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun BirthDateField(
+    birthDate: String,
+    onBirthDateChange: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    var showDialog by remember { mutableStateOf(false) }
+    val datePickerState = rememberDatePickerState()
+    val dateFormat = SimpleDateFormat(stringResource(id = R.string.date_format), Locale.getDefault())
+    dateFormat.timeZone = TimeZone.getTimeZone(stringResource(id = R.string.date_time_zone))
+
+    Box(modifier = modifier) {
+        FormTextField(
+            value = birthDate,
+            onValueChange = {},
+            label = stringResource(id = R.string.label_birth_date),
+            readOnly = true,
+            trailingIcon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_calendar),
+                    contentDescription = stringResource(id = R.string.cd_calendar),
+                    tint = colorResource(id = R.color.field_text),
+                    modifier = Modifier.size(dimensionResource(id = R.dimen.icon_size))
+                )
+            },
+            modifier = Modifier.fillMaxWidth()
+        )
+        Box(
+            modifier = Modifier
+                .matchParentSize()
+                .clickable { showDialog = true }
+        )
+    }
+
+    if (showDialog) {
+        DatePickerDialog(
+            onDismissRequest = { showDialog = false },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        datePickerState.selectedDateMillis?.let { millis ->
+                            onBirthDateChange(dateFormat.format(Date(millis)))
+                        }
+                        showDialog = false
+                    }
+                ) {
+                    Text(text = stringResource(id = R.string.dialog_ok))
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showDialog = false }) {
+                    Text(text = stringResource(id = R.string.dialog_cancel))
+                }
+            }
+        ) {
+            DatePicker(state = datePickerState)
+        }
+    }
+}
