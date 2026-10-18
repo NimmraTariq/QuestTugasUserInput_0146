@@ -96,3 +96,24 @@ fun HeaderImage(modifier: Modifier = Modifier) {
         PagerDots(modifier = Modifier.align(Alignment.TopStart))
     }
 }
+
+@Composable
+fun FormTitle(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = stringResource(id = R.string.form_title),
+            color = colorResource(id = R.color.title_purple),
+            fontSize = dimensionResource(id = R.dimen.title_size).value.sp,
+            fontWeight = FontWeight.Bold
+        )
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.title_spacing)))
+        Text(
+            text = stringResource(id = R.string.form_subtitle),
+            color = colorResource(id = R.color.subtitle_gray),
+            fontSize = dimensionResource(id = R.dimen.subtitle_size).value.sp
+        )
+    }
+}
