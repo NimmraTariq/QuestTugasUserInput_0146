@@ -117,3 +117,30 @@ fun FormTitle(modifier: Modifier = Modifier) {
         )
     }
 }
+
+@Composable
+fun FormTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    label: String,
+    modifier: Modifier = Modifier,
+    readOnly: Boolean = false,
+    trailingIcon: @Composable (() -> Unit)? = null
+) {
+    OutlinedTextField(
+        value = value,
+        onValueChange = onValueChange,
+        label = { Text(text = label) },
+        readOnly = readOnly,
+        trailingIcon = trailingIcon,
+        singleLine = true,
+        shape = RoundedCornerShape(dimensionResource(id = R.dimen.field_corner_radius)),
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedBorderColor = colorResource(id = R.color.title_purple),
+            unfocusedBorderColor = colorResource(id = R.color.field_border),
+            focusedTextColor = colorResource(id = R.color.field_text),
+            unfocusedTextColor = colorResource(id = R.color.field_text)
+        ),
+        modifier = modifier
+    )
+}
