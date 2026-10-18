@@ -144,3 +144,44 @@ fun FormTextField(
         modifier = modifier
     )
 }
+
+@Composable
+fun NameFields(
+    firstName: String,
+    onFirstNameChange: (String) -> Unit,
+    lastName: String,
+    onLastNameChange: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.field_spacing))
+    ) {
+        FormTextField(
+            value = firstName,
+            onValueChange = onFirstNameChange,
+            label = stringResource(id = R.string.label_first_name),
+            modifier = Modifier.weight(1f)
+        )
+        FormTextField(
+            value = lastName,
+            onValueChange = onLastNameChange,
+            label = stringResource(id = R.string.label_last_name),
+            modifier = Modifier.weight(1f)
+        )
+    }
+}
+
+@Composable
+fun EmailField(
+    email: String,
+    onEmailChange: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    FormTextField(
+        value = email,
+        onValueChange = onEmailChange,
+        label = stringResource(id = R.string.label_email),
+        modifier = modifier.fillMaxWidth()
+    )
+}
