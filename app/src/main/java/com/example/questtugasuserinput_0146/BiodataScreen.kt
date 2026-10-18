@@ -359,3 +359,27 @@ fun SkillsSection(
         }
     }
 }
+
+@Composable
+fun ProceedButton(
+    enabled: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Button(
+        onClick = onClick,
+        enabled = enabled,
+        shape = RoundedCornerShape(dimensionResource(id = R.dimen.button_corner_radius)),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = colorResource(id = R.color.button_enabled),
+            contentColor = colorResource(id = R.color.button_text),
+            disabledContainerColor = colorResource(id = R.color.button_disabled),
+            disabledContentColor = colorResource(id = R.color.button_text_disabled)
+        ),
+        modifier = modifier
+            .fillMaxWidth()
+            .height(dimensionResource(id = R.dimen.button_height))
+    ) {
+        Text(text = stringResource(id = R.string.button_proceed))
+    }
+}
