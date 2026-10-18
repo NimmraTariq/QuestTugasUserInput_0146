@@ -292,3 +292,70 @@ fun ExperienceDropdown(
         }
     }
 }
+
+@Composable
+fun SkillCheckbox(
+    label: String,
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Checkbox(
+            checked = checked,
+            onCheckedChange = onCheckedChange,
+            colors = CheckboxDefaults.colors(
+                checkedColor = colorResource(id = R.color.checkbox_checked),
+                uncheckedColor = colorResource(id = R.color.checkbox_unchecked)
+            )
+        )
+        Text(
+            text = label,
+            color = colorResource(id = R.color.field_text),
+            fontSize = dimensionResource(id = R.dimen.skill_text_size).value.sp
+        )
+    }
+}
+
+@Composable
+fun SkillsSection(
+    androidChecked: Boolean,
+    onAndroidChange: (Boolean) -> Unit,
+    uiuxChecked: Boolean,
+    onUiuxChange: (Boolean) -> Unit,
+    webChecked: Boolean,
+    onWebChange: (Boolean) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column(modifier = modifier.fillMaxWidth()) {
+        Text(
+            text = stringResource(id = R.string.label_skills),
+            color = colorResource(id = R.color.field_text),
+            fontSize = dimensionResource(id = R.dimen.skills_label_size).value.sp,
+            fontWeight = FontWeight.Bold
+        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            SkillCheckbox(
+                label = stringResource(id = R.string.skill_android),
+                checked = androidChecked,
+                onCheckedChange = onAndroidChange
+            )
+            SkillCheckbox(
+                label = stringResource(id = R.string.skill_uiux),
+                checked = uiuxChecked,
+                onCheckedChange = onUiuxChange
+            )
+            SkillCheckbox(
+                label = stringResource(id = R.string.skill_web),
+                checked = webChecked,
+                onCheckedChange = onWebChange
+            )
+        }
+    }
+}
