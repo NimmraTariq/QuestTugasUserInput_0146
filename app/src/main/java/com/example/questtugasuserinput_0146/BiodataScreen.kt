@@ -383,3 +383,58 @@ fun ProceedButton(
         Text(text = stringResource(id = R.string.button_proceed))
     }
 }
+
+@Composable
+fun ResultBox(
+    firstName: String,
+    lastName: String,
+    email: String,
+    birthDate: String,
+    experience: String,
+    skills: String,
+    modifier: Modifier = Modifier
+) {
+    val textColor = colorResource(id = R.color.result_text)
+    val textSize = dimensionResource(id = R.dimen.result_text_size).value.sp
+
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(dimensionResource(id = R.dimen.result_corner_radius)))
+            .background(colorResource(id = R.color.result_background))
+            .padding(dimensionResource(id = R.dimen.result_padding)),
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.result_spacing))
+    ) {
+        Text(
+            text = stringResource(id = R.string.result_title),
+            color = textColor,
+            fontSize = dimensionResource(id = R.dimen.result_title_size).value.sp,
+            fontWeight = FontWeight.Bold
+        )
+        Text(
+            text = stringResource(id = R.string.result_name, firstName, lastName),
+            color = textColor,
+            fontSize = textSize
+        )
+        Text(
+            text = stringResource(id = R.string.result_email, email),
+            color = textColor,
+            fontSize = textSize
+        )
+        Text(
+            text = stringResource(id = R.string.result_birth_date, birthDate),
+            color = textColor,
+            fontSize = textSize
+        )
+        Text(
+            text = stringResource(id = R.string.result_experience, experience),
+            color = textColor,
+            fontSize = textSize
+        )
+        Text(
+            text = stringResource(id = R.string.result_skills, skills),
+            color = textColor,
+            fontSize = textSize
+        )
+    }
+}
