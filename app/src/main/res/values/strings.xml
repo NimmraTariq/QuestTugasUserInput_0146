@@ -1,3 +1,40 @@
 <resources>
     <string name="app_name">QuestTugasUserInput_0146</string>
+
+    <string name="cd_header_image">Gambar header</string>
+    <string name="cd_calendar">Pilih tanggal</string>
+    <string name="cd_dropdown">Pilih pengalaman</string>
+
+    <string name="form_title">Form Biodata</string>
+    <string name="form_subtitle">Silahkan isi biodata Anda dibawah ini !!!</string>
+    <string name="label_first_name">Nama Depan</string>
+    <string name="label_last_name">Nama Belakang</string>
+    <string name="label_email">Email</string>
+    <string name="label_birth_date">Tgl Lahir</string>
+    <string name="label_experience">Experience</string>
+    <string name="label_skills">Pilih Skill Anda :</string>
+    <string name="skill_android">Android</string>
+    <string name="skill_uiux">UI/UX</string>
+    <string name="skill_web">Web</string>
+    <string name="button_proceed">Proceed</string>
+
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Batal</string>
+    <string name="date_format" translatable="false">dd/MM/yyyy</string>
+    <string name="date_time_zone" translatable="false">UTC</string>
+    <string name="skills_separator">", "</string>
+
+    <string name="result_title">Data Anda</string>
+    <string name="result_name">Nama : %1$s %2$s</string>
+    <string name="result_email">Email : %1$s</string>
+    <string name="result_birth_date">Tgl Lahir : %1$s</string>
+    <string name="result_experience">Experience : %1$s</string>
+    <string name="result_skills">Skill : %1$s</string>
+
+    <string-array name="experience_options">
+        <item>Kurang dari 1 tahun</item>
+        <item>1 - 3 tahun</item>
+        <item>3 - 5 tahun</item>
+        <item>Lebih dari 5 tahun</item>
+    </string-array>
 </resources>
