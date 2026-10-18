@@ -246,3 +246,49 @@ fun BirthDateField(
         }
     }
 }
+
+@Composable
+fun ExperienceDropdown(
+    selected: String,
+    onSelected: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    var expanded by remember { mutableStateOf(false) }
+    val options = stringArrayResource(id = R.array.experience_options)
+
+    Box(modifier = modifier) {
+        FormTextField(
+            value = selected,
+            onValueChange = {},
+            label = stringResource(id = R.string.label_experience),
+            readOnly = true,
+            trailingIcon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_arrow_drop_down),
+                    contentDescription = stringResource(id = R.string.cd_dropdown),
+                    tint = colorResource(id = R.color.field_text)
+                )
+            },
+            modifier = Modifier.fillMaxWidth()
+        )
+        Box(
+            modifier = Modifier
+                .matchParentSize()
+                .clickable { expanded = true }
+        )
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false }
+        ) {
+            options.forEach { option ->
+                DropdownMenuItem(
+                    text = { Text(text = option) },
+                    onClick = {
+                        onSelected(option)
+                        expanded = false
+                    }
+                )
+            }
+        }
+    }
+}
